@@ -3,14 +3,28 @@ import { searchMedia } from "../../shared/api/omdb-service";
 
 interface MediaState {
   searchResults: any; //TODO: add type
+  totalResults: number;
   error: string | null;
   loading: boolean;
+  searchQuery: {
+    title: string;
+    year?: number;
+    type: 'movie' | 'series' | 'episode';
+    page: number;
+  };
 }
 
 const initialState: MediaState = {
   searchResults: [],
+  totalResults: 0,
   error: null,
   loading: false,
+  searchQuery: {
+    title: "Pokemon",
+    year: undefined,
+    type: "movie",
+    page: 1,
+  },
 };
 
 export const search = createAsyncThunk(
@@ -28,7 +42,7 @@ export const search = createAsyncThunk(
       const response = await searchMedia(searchQuery);
       console.log(response);
       if (response.data.Response === "True") {
-        return response.data.Search;
+        return response.data;
       } else {
         throw new Error("No results found");
       }
@@ -41,7 +55,12 @@ export const search = createAsyncThunk(
 export const mediaSlice = createSlice({
   name: "media",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    updateTitle: (state, action) => { state.searchQuery.title = action.payload },
+    updateYear: (state, action) => { state.searchQuery.year = action.payload },
+    updatePage: (state, action) => { state.searchQuery.page = action.payload },
+    updateType: (state, action) => { state.searchQuery.type = action.payload },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(search.pending, (state) => {
@@ -50,14 +69,17 @@ export const mediaSlice = createSlice({
       })
       .addCase(search.fulfilled, (state, action) => {
         state.loading = false;
-        state.searchResults = action.payload;
+        state.searchResults = action.payload.Search;
+        state.totalResults = parseInt(action.payload.totalResults);
       })
       .addCase(search.rejected, (state, action) => {
         state.loading = false;
         state.searchResults = [];
+        state.totalResults = 0;
         state.error = action.payload as any;
       });
   },
 });
 
+export const { updateTitle, updateYear, updatePage, updateType } = mediaSlice.actions;
 export default mediaSlice.reducer;

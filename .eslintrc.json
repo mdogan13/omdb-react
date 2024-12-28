@@ -1,42 +1,37 @@
 {
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "node": true
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/jsx-runtime"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/jsx-runtime"
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "no-unused-vars": "off", // Disable unused variable checks
+    "no-unused-private-class-members": "off", // Disable unused class member checks
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" } // Ignore unused function arguments starting with "_"
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "sourceType": "module"
-    },
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "no-unused-vars": "off",                // Disable unused variable checks
-      "no-unused-private-class-members": "off", // Disable unused class member checks
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { "argsIgnorePattern": "^_" }         // Ignore unused function arguments starting with "_"
-      ],
-      "react/prop-types": "on",              // Disable PropTypes validation (use TypeScript for typing)
-      "@typescript-eslint/explicit-module-boundary-types": "off", // Disable function return type enforcement
-      "@typescript-eslint/no-explicit-any": "off", // Allow the use of "any" type
-      "react/react-in-jsx-scope": "off"      // React 17 JSX Transform - no need to import React
-    },
-    "settings": {
-      "react": {
-        "version": "detect"                   // Automatically detects the React version
-      }
+    "@typescript-eslint/explicit-module-boundary-types": "off", // Disable function return type enforcement
+    "@typescript-eslint/no-explicit-any": "off", // Allow the use of "any" type
+    "react/react-in-jsx-scope": "off" // React 17 JSX Transform - no need to import React
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detects the React version
     }
   }
-  
+}

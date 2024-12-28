@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './SearchForm.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateTitle, updateType, updateYear } from '../../features/media/mediaSlice';
 
 interface SearchFormProps {
-  onSearch: (query: any) => void;
+  onSearch: () => void;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
-  const [searchParams, setSearchParams] = useState({ query: '', year: '', type: 'movie' });
+  const { searchQuery } = useSelector((state: any) => state.media);
+  const dispatch = useDispatch<any>();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch({ ...searchParams, query: searchParams.query.trim() });
+    onSearch();  
   };
 
   return (
@@ -18,19 +21,20 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
       <form className="d-flex gap-3" onSubmit={handleSubmit}>
         <input
           type="text"
-          value={searchParams.query}
+          value={searchQuery.title}
           className={`form-control  ${styles.searchBar}   ${styles.inputResponsive}`}
           onChange={(e) => {
-            setSearchParams((prev) => ({ ...prev, query: e.target.value }));
+            dispatch(updateTitle(e.target.value));
+
           }}
           placeholder="Search..."
         />
 
         <select
           className={`form-select  ${styles.filter}  ${styles.inputResponsive}`}
-          value={searchParams.type}
+          value={searchQuery.type}
           onChange={(e) => {
-            setSearchParams((prev) => ({ ...prev, type: e.target.value }));
+            dispatch(updateType(e.target.value));
           }}
         >
           <option value="movie">Movies</option>
@@ -40,10 +44,10 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
 
         <input
           type="number"
-          value={searchParams.year}
+          value={searchQuery.year}
           className={`form-control ${styles.filter}     ${styles.inputResponsive}`}
           onChange={(e) => {
-            setSearchParams((prev) => ({ ...prev, year: e.target.value }));
+            dispatch(updateYear(e.target.value));
           }}
           placeholder="Year"
           min="1900"

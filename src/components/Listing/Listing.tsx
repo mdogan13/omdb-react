@@ -1,35 +1,35 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { search } from "../../features/media/mediaSlice";
+import { search, updatePage } from "../../features/media/mediaSlice";
 import styles from "./Listing.module.scss";
 import SearchForm from "../SearchForm/SearchForm";
+import { Pagination } from "antd";
 
-const Listing: React.FC = (props) => {
+const Listing: React.FC = () => {
+  const { searchResults, loading, totalResults, searchQuery } = useSelector((state: any) => state.media);
   const dispatch = useDispatch<any>();
-  const { searchResults, loading } = useSelector((state: any) => state.media);
 
   useEffect(() => {
-    dispatch(search({ title: "pokemon", page: 1, type: "movie" }));
+    dispatch(search({ ...searchQuery, title: searchQuery.title.trim() }));
   }, []);
 
-  const searchMedia = (query: any) => {
-    if (query.query) {
-      dispatch(search({ title: query.query, page: 1, type: query.type, year: query.year }));
-    }
+  const searchMedia = (page: number) => {
+    dispatch(updatePage(page));
+    dispatch(search({ ...searchQuery, page, title: searchQuery.title.trim() }));
   };
+
   return (
     <>
       {/* <h2>Movie Listings</h2> */}
       {/* {loading && <p>Loading...</p>} */}
-      {/* {error && <p>Error: {error}</p>} */}
-      <SearchForm onSearch={searchMedia} />
+      <SearchForm onSearch={() => searchMedia(1)} />
 
-      <div className="container d-flex justify-content-center"  >
+      <div className="container d-flex flex-column justify-content-center"  >
         <div className="row w-100">
           {searchResults?.length > 0 ? (
             <>
               {searchResults.map((media: any) => (
-                <div className={`col-lg-3 col-md-4 col-sm-4 col-6 d-flex flex-column justify-content-between ${styles.mediaContainer}`}>
+                <div key={media.imdbID} className={`col-lg-3 col-md-4 col-sm-4 col-6 d-flex flex-column justify-content-between ${styles.mediaContainer}`}>
                   <div >
                     <img src={media.Poster} alt={media.Title} className={styles.poster} />
                   </div>
@@ -40,9 +40,17 @@ const Listing: React.FC = (props) => {
               ))}
             </>
           ) : (
-            !loading && <div style={{ padding: "1rem" }}>No results found.</div>
+            !loading && <div className={styles.noResult}>No results found.</div>
           )}
         </div>
+
+        <Pagination
+          className="my-4 align-self-center"
+          showQuickJumper
+          total={totalResults}
+          onChange={searchMedia}
+          showSizeChanger={false}
+          current={searchQuery.page} />
       </div>
     </>
   );
