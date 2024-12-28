@@ -1,6 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { searchMedia } from "../../shared/api/omdb-service";
 
+interface MediaState {
+  searchResults: any; //TODO: add type
+  error: string | null;
+  loading: boolean;
+}
+
+const initialState: MediaState = {
+  searchResults: [],
+  error: null,
+  loading: false,
+};
+
 export const search = createAsyncThunk(
   "media/search",
   async (
@@ -16,7 +28,7 @@ export const search = createAsyncThunk(
       const response = await searchMedia(searchQuery);
       console.log(response);
       if (response.data.Response === "True") {
-        return response.data.Search; 
+        return response.data.Search;
       } else {
         throw new Error("No results found");
       }
@@ -28,11 +40,7 @@ export const search = createAsyncThunk(
 
 export const mediaSlice = createSlice({
   name: "media",
-  initialState: {
-    searchResults: [],
-    error: null,
-    loading: false,
-  },
+  initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -46,6 +54,7 @@ export const mediaSlice = createSlice({
       })
       .addCase(search.rejected, (state, action) => {
         state.loading = false;
+        state.searchResults = [];
         state.error = action.payload as any;
       });
   },

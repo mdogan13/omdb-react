@@ -1,0 +1,50 @@
+.filter {
+    flex: 1;
+}
+
+.searchBar {
+    flex: 4;
+}
+
+@media (max-width: 430px) {
+    .searchBar {
+        flex: 1;
+    }
+    .btnResponsive,
+    .inputResponsive {
+        font-size: 11px !important;
+        padding: 4px 6px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .btnResponsive,
+    .inputResponsive {
+        font-size: 11px !important;
+        padding: 4px 6px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .btnResponsive,
+    .inputResponsive {
+        font-size: 12px !important;
+        padding: 6px 12px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .btnResponsive,
+    .inputResponsive {
+        font-size: 14px !important;
+        padding: 8px 12px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .btnResponsive,
+    .inputResponsive {
+        padding: 10px 16px !important;
+        font-size: 18px !important;
+    }
+}
