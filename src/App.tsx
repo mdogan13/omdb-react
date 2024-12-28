@@ -1,18 +1,18 @@
 import React from 'react';
-import styles from './App.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment, incrementByAmount } from './features/counter/counterSlice';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+//import styles from './App.module.scss';
+//import { useDispatch, useSelector } from 'react-redux';
+//import { decrement, increment, incrementByAmount } from './features/counter/counterSlice';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Details from './components/Details/Details';
 import Listing from './components/Listing/Listing';
 
 function App() {
-  const count = useSelector((state: any) => state.counter.value)
-  const dispatch = useDispatch()
+ //const count = useSelector((state: any) => state.counter.value)
+ //const dispatch = useDispatch()
 
   return (
     <Router>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -22,13 +22,12 @@ function App() {
           </li>
 
         </ul>
-      </nav>
+      </nav> */}
 
       <Routes>
         <Route path="/" element={
           <>
-
-            <div className="App">
+            {/* <div className="App">
               <div className={styles.testClass}>
                 Test
               </div>
@@ -51,8 +50,8 @@ function App() {
               >
                 Decrement
               </button>
-            </div>
-            <Listing movies={[]} />
+            </div> */}
+            <Listing   />
           </>
         } />
         <Route path="/details" element={<Details title={''} year={''} genre={''} director={''} plot={''} />} />
