@@ -12,3 +12,7 @@ export const searchMedia: any = (payload: {
   }
   return http.get(`/${queryString}`);
 };
+
+export const getMediaById: any = (id: string) => {
+  return http.get(`/?i=${id}&plot=full`);
+};

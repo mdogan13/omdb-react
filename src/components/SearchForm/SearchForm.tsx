@@ -22,7 +22,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         <input
           type="text"
           value={searchQuery.title}
-          className={`form-control  ${styles.searchBar}   ${styles.inputResponsive}`}
+          className={`form-control  ${styles.searchBar} ${styles.inputResponsive}`}
           onChange={(e) => {
             dispatch(updateTitle(e.target.value));
 
@@ -31,7 +31,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         />
 
         <select
-          className={`form-select  ${styles.filter}  ${styles.inputResponsive}`}
+          className={`form-select ${styles.customSelect} ${styles.filter} ${styles.inputResponsive}`}
           value={searchQuery.type}
           onChange={(e) => {
             dispatch(updateType(e.target.value));
@@ -45,7 +45,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         <input
           type="number"
           value={searchQuery.year}
-          className={`form-control ${styles.filter}     ${styles.inputResponsive}`}
+          className={`form-control ${styles.filter} ${styles.inputResponsive}`}
           onChange={(e) => {
             dispatch(updateYear(e.target.value));
           }}

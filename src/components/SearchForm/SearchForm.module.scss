@@ -10,14 +10,14 @@
     .searchBar {
         flex: 1;
     }
-    .btnResponsive,
-    .inputResponsive {
-        font-size: 11px !important;
-        padding: 4px 6px !important;
+
+    .customSelect {
+        background-size: 10px 8px !important;
     }
 }
 
 @media (max-width: 768px) {
+
     .btnResponsive,
     .inputResponsive {
         font-size: 11px !important;
@@ -26,6 +26,7 @@
 }
 
 @media (min-width: 768px) {
+
     .btnResponsive,
     .inputResponsive {
         font-size: 12px !important;
@@ -34,6 +35,7 @@
 }
 
 @media (min-width: 992px) {
+
     .btnResponsive,
     .inputResponsive {
         font-size: 14px !important;
@@ -42,6 +44,7 @@
 }
 
 @media (min-width: 1200px) {
+
     .btnResponsive,
     .inputResponsive {
         padding: 10px 16px !important;

@@ -4,10 +4,12 @@ import { search, updatePage } from "../../features/media/mediaSlice";
 import styles from "./Listing.module.scss";
 import SearchForm from "../SearchForm/SearchForm";
 import { Pagination } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Listing: React.FC = () => {
   const { searchResults, loading, totalResults, searchQuery } = useSelector((state: any) => state.media);
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(search({ ...searchQuery, title: searchQuery.title.trim() }));
@@ -29,7 +31,8 @@ const Listing: React.FC = () => {
           {searchResults?.length > 0 ? (
             <>
               {searchResults.map((media: any) => (
-                <div key={media.imdbID} className={`col-lg-3 col-md-4 col-sm-4 col-6 d-flex flex-column justify-content-between ${styles.mediaContainer}`}>
+                <div key={media.imdbID} className={`col-lg-3 col-md-4 col-sm-4 col-6 d-flex flex-column justify-content-between ${styles.mediaContainer}`}
+                  onClick={() => navigate(`/details/${media.imdbID}`)}>
                   <div >
                     <img src={media.Poster} alt={media.Title} className={styles.poster} />
                   </div>
