@@ -25,7 +25,7 @@ const Listing: React.FC = () => {
   return (
     <>
       <SearchForm onSearch={() => searchMedia(1)} />
-      <div className="container d-flex flex-column justify-content-center"  >
+      <div className="container d-flex flex-column align-items-center"  >
         <div className="row w-100">
           {loading && <Spinner />}
           {searchResults?.length > 0 ? (

@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
 					<address>
 						<a href="mailto:hey@omdbstream.co" target="_blank" rel="noreferrer">hey@omdbstream.co</a>
 					</address>
-					<a>Climate</a>
-					<a>Credits</a>
-					<a>Terms</a>
-					<a>Privacy</a></div>
+					<span>Climate</span>
+					<span>Credits</span>
+					<span>Terms</span>
+					<span>Privacy</span></div>
 			</div>
 
 		</footer>

@@ -12,6 +12,8 @@ export interface MediaState {
     year?: string;
     type: "movie" | "series" | "episode";
     page: number;
+    episode?: number;
+    season?: number;
   };
 }
 
@@ -25,6 +27,8 @@ const initialState: MediaState = {
     year: undefined,
     type: "movie",
     page: 1,
+    episode: undefined,
+    season: undefined,
   },
 };
 
@@ -68,6 +72,15 @@ export const mediaSlice = createSlice({
     updateType: (state, action) => {
       state.searchQuery.type = action.payload;
     },
+    updateSeason: (state, action) => {
+      state.searchQuery.season = action.payload;
+    },
+    updateEpisode: (state, action) => {
+      state.searchQuery.episode = action.payload;
+    },
+    updateLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,6 +102,13 @@ export const mediaSlice = createSlice({
   },
 });
 
-export const { updateTitle, updateYear, updatePage, updateType } =
-  mediaSlice.actions;
+export const {
+  updateTitle,
+  updateYear,
+  updatePage,
+  updateType,
+  updateEpisode,
+  updateSeason,
+  updateLoading,
+} = mediaSlice.actions;
 export default mediaSlice.reducer;
