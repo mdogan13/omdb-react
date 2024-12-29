@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 import { getMediaById } from '../../shared/api/omdb-service';
 import styles from './Details.module.scss';
 import Metascore from '../Metascore/Metascore';
+import { useSelector } from 'react-redux';
+import Spinner from '../Spinner/Spinner';
+ 
 
 const Details: React.FC = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
   const [mediaDetails, setMediaDetails] = useState<any>(null);
+  const { loading } = useSelector((state: any) => state.media);
 
   useEffect(() => {
     const fetchMediaDetails = async () => {
@@ -23,7 +27,7 @@ const Details: React.FC = () => {
 
   return (
     <>
-      {mediaDetails && (
+      {mediaDetails && !loading ? (
         <div className={`container d-flex justify-content-center ${styles.mainContainer}`}>
           <div className={`row w-100 ${styles.containerRow}`}>
             <div className='col-12 col-md-4 col-lg-4'>
@@ -72,6 +76,8 @@ const Details: React.FC = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <Spinner />
       )
       }
     </>

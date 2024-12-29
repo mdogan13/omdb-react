@@ -5,6 +5,7 @@ import styles from "./Listing.module.scss";
 import SearchForm from "../SearchForm/SearchForm";
 import { Pagination } from "antd";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../Spinner/Spinner";
 
 const Listing: React.FC = () => {
   const { searchResults, loading, totalResults, searchQuery } = useSelector((state: any) => state.media);
@@ -22,12 +23,10 @@ const Listing: React.FC = () => {
 
   return (
     <>
-      {/* <h2>Movie Listings</h2> */}
-      {/* {loading && <p>Loading...</p>} */}
       <SearchForm onSearch={() => searchMedia(1)} />
-
       <div className="container d-flex flex-column justify-content-center"  >
         <div className="row w-100">
+          {loading && <Spinner />}
           {searchResults?.length > 0 ? (
             <>
               {searchResults.map((media: any) => (
