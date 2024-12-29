@@ -20,7 +20,6 @@ const Details: React.FC = () => {
       if (imdbID) {
         getMediaById(imdbID).then((response: any) => {
           setMediaDetails(response.data);
-          console.log(response)
         });
       }
     };

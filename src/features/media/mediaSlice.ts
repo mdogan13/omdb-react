@@ -41,7 +41,6 @@ export const search = createAsyncThunk(
   ) => {
     try {
       const response = await searchMedia(searchQuery);
-      console.log(response);
       if (response.data.Response === "True") {
         return response.data;
       } else {
