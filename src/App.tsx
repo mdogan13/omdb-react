@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Details from './components/Details/Details';
 import Listing from './components/Listing/Listing';
+import Footer from './components/Footer/Footer';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,8 @@ const App: React.FC = () => {
         <Route path="/" element={<Listing />} />
         <Route path="/details/:imdbID" element={<Details />} />
       </Routes>
+      
+      <Footer/>
     </Router>
   );
 }
