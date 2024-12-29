@@ -24,7 +24,7 @@ const Details: React.FC = () => {
   return (
     <>
       {mediaDetails && (
-        <div className='container d-flex justify-content-center py-5'>
+        <div className={`container d-flex justify-content-center ${styles.mainContainer}`}>
           <div className={`row w-100 ${styles.containerRow}`}>
             <div className='col-12 col-md-4 col-lg-4'>
               <img className={styles.poster} src={mediaDetails.Poster} alt={mediaDetails.Title} />

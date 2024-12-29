@@ -17,7 +17,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className='container px-4 py-5'>
+    <div className={`container px-4 ${styles.formPadding}`}>
       <form className="d-flex gap-3" onSubmit={handleSubmit}>
         <input
           type="text"
