@@ -1,15 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { searchMedia } from "../../shared/api/omdb-service";
+import { MediaSearchResult } from "../../shared/models/Media";
 
-interface MediaState {
-  searchResults: any; //TODO: add type
+export interface MediaState {
+  searchResults: MediaSearchResult[];
   totalResults: number;
   error: string | null;
   loading: boolean;
   searchQuery: {
     title: string;
-    year?: number;
-    type: 'movie' | 'series' | 'episode';
+    year?: string;
+    type: "movie" | "series" | "episode";
     page: number;
   };
 }
@@ -56,10 +57,18 @@ export const mediaSlice = createSlice({
   name: "media",
   initialState: initialState,
   reducers: {
-    updateTitle: (state, action) => { state.searchQuery.title = action.payload },
-    updateYear: (state, action) => { state.searchQuery.year = action.payload },
-    updatePage: (state, action) => { state.searchQuery.page = action.payload },
-    updateType: (state, action) => { state.searchQuery.type = action.payload },
+    updateTitle: (state, action) => {
+      state.searchQuery.title = action.payload;
+    },
+    updateYear: (state, action) => {
+      state.searchQuery.year = action.payload;
+    },
+    updatePage: (state, action) => {
+      state.searchQuery.page = action.payload;
+    },
+    updateType: (state, action) => {
+      state.searchQuery.type = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -81,5 +90,6 @@ export const mediaSlice = createSlice({
   },
 });
 
-export const { updateTitle, updateYear, updatePage, updateType } = mediaSlice.actions;
+export const { updateTitle, updateYear, updatePage, updateType } =
+  mediaSlice.actions;
 export default mediaSlice.reducer;

@@ -6,12 +6,14 @@ import styles from './Details.module.scss';
 import Metascore from '../Metascore/Metascore';
 import { useSelector } from 'react-redux';
 import Spinner from '../Spinner/Spinner';
- 
+import { Media } from '../../shared/models/Media';
+import { MediaState } from '../../features/media/mediaSlice';
+
 
 const Details: React.FC = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
-  const [mediaDetails, setMediaDetails] = useState<any>(null);
-  const { loading } = useSelector((state: any) => state.media);
+  const [mediaDetails, setMediaDetails] = useState<Media>(null);
+  const { loading } = useSelector((state: { media: MediaState }) => state.media);
 
   useEffect(() => {
     const fetchMediaDetails = async () => {

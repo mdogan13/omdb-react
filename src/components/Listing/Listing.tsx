@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { search, updatePage } from "../../features/media/mediaSlice";
+import { MediaState, search, updatePage } from "../../features/media/mediaSlice";
 import styles from "./Listing.module.scss";
 import SearchForm from "../SearchForm/SearchForm";
 import { Pagination } from "antd";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
+import { Media } from "../../shared/models/Media";
 
 const Listing: React.FC = () => {
-  const { searchResults, loading, totalResults, searchQuery } = useSelector((state: any) => state.media);
+  const { searchResults, loading, totalResults, searchQuery } = useSelector((state: { media: MediaState }) => state.media);
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ const Listing: React.FC = () => {
           {loading && <Spinner />}
           {searchResults?.length > 0 ? (
             <>
-              {searchResults.map((media: any) => (
+              {searchResults.map((media: Media) => (
                 <div key={media.imdbID} className={`col-lg-3 col-md-4 col-sm-4 col-6 d-flex flex-column justify-content-between ${styles.mediaContainer}`}
                   onClick={() => navigate(`/details/${media.imdbID}`)}>
                   <div >

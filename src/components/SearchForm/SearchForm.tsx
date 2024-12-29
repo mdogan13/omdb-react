@@ -1,19 +1,19 @@
 import React from 'react';
 import styles from './SearchForm.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTitle, updateType, updateYear } from '../../features/media/mediaSlice';
+import { MediaState, updateTitle, updateType, updateYear } from '../../features/media/mediaSlice';
 
 interface SearchFormProps {
   onSearch: () => void;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
-  const { searchQuery } = useSelector((state: any) => state.media);
+  const { searchQuery } = useSelector((state: { media: MediaState }) => state.media);
   const dispatch = useDispatch<any>();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch();  
+    onSearch();
   };
 
   return (

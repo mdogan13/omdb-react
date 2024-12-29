@@ -4,7 +4,7 @@ export const searchMedia: any = (payload: {
   title: string;
   page: number;
   year?: string;
-  type: string;
+  type: string; 
 }) => {
   let queryString = `?s=${payload.title}&type=${payload.type}&page=${payload.page}`;
   if (payload.year) {
